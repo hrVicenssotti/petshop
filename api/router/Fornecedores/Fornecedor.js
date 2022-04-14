@@ -1,4 +1,4 @@
-const tableFornecedor = require("./tableFornecedor")
+const modelFunction = require("./functions")
 class Fornecedor{
     constructor({id, empresa, email, categoria, dataCriacao, dataAtualizacao, versao}) {
         this.id = id
@@ -10,7 +10,7 @@ class Fornecedor{
         this.versao = versao
     }
     async create() {
-        const result = await tableFornecedor.inserir({
+        const result = await modelFunction.insert({
             empresa: this.empresa,
             email: this.email,
             categoria: this.categoria

@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const intancia = require('../../data-base')
+const intancia = require('../data-base')
 
 const colunas = {
     empresa: {
