@@ -44,6 +44,9 @@ class Fornecedor{
         }
         await modelFunction.update(this.id, dados)
     }
+    async deleteID() {
+        
+    }
 }
 
 module.exports = Fornecedor
