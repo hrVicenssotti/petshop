@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize')
 const intancia = require('../data-base')
-
 const colunas = {
     empresa: {
         type: Sequelize.STRING,
@@ -20,7 +19,7 @@ const opcoes = {
     tableName: 'fornecedores',
     timestamps: true,
     createdAt: 'dataCriacao',
-    updateAt: 'dataAtualizacao',
+    updatedAt: 'dataAtualizacao',
     version: 'versao'
 }
 module.exports = intancia.define('Fornecedor', colunas, opcoes)

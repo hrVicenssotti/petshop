@@ -1,4 +1,7 @@
 const modelFunction = require("./functions")
+const Invalidfield = require('../../error/Invalidfield')
+const Nodata = require('../../error/Nodata')
+
 class Fornecedor{
     constructor({id, empresa, email, categoria, dataCriacao, dataAtualizacao, versao}) {
         this.id = id
@@ -10,6 +13,7 @@ class Fornecedor{
         this.versao = versao
     }
     async create() {
+        this.authenticate()
         const result = await modelFunction.insert({
             empresa: this.empresa,
             email: this.email,
@@ -38,14 +42,23 @@ class Fornecedor{
             if (typeof valor === 'string' && valor.length > 0) {
                 dados[campo] = valor
             }
-        }) 
+        })
         if (Object.keys(dados).length === 0) {
-            throw new Error('Nenhum dado para atualizar')
+            throw new Nodata()
         }
         await modelFunction.update(this.id, dados)
     }
-    async deleteID() {
-        
+    deleteID() {
+        return modelFunction.deleteID(this.id)
+    }
+    authenticate() {
+        const campos = ['empresa', 'email', 'categoria']
+        campos.forEach(campo => {
+            const valor = this[campo]
+            if (typeof valor !== 'string' || valor.length === 0) {
+                throw new Invalidfield(campo)
+            }
+        })
     }
 }
 

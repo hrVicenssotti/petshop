@@ -1,4 +1,4 @@
-const model = require('../router/Fornecedores/modelData')
+const model = require('../models/Fornecedor')
 
 model   
     .sync()

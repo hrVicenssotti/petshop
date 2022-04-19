@@ -1,8 +1,8 @@
 const model = require('../../models/Fornecedor')
-
+const Notfound = require('../../error/Notfound')
 module.exports = {
     read() {
-        return model.findAll()
+        return model.findAll( { raw: true } )
     },
     insert(objeto) {
         return model.create(objeto)
@@ -14,12 +14,19 @@ module.exports = {
             }
         })
         if (!result) {
-            throw new Error('Fornecedor não encontrado')
+            throw new Notfound()
         }
         return result
     },
     update(id, dados) {
         return model.update(dados, {
+            where: {
+                id: id
+            }
+        })
+    },
+    deleteID(id) {
+        return model.destroy({
             where: {
                 id: id
             }
