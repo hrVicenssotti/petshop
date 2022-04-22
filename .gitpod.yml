@@ -1,4 +1,4 @@
 tasks:
   - init: npm install
-  command: npx nodemon api/main.js
+    command: npx nodemon api/main.js
 
